@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:12-alpine
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -8,7 +8,10 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN yarn install
+RUN apk add --no-cache curl
+RUN apk add --no-cache bash
+RUN curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+
 # If you are building your code for production
 # RUN npm ci --only=production
 
